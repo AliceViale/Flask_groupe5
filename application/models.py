@@ -5,4 +5,6 @@ class Knowledge(db.Model):
     
     id = db.Column(db.Integer,primary_key=True)
     url = db.Column(db.String, unique=True)
+    title = db.Column(db.String)
     json_tree = db.Column(db.String)
+    raw_text = db.Column(db.String)
