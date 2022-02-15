@@ -22,12 +22,6 @@ def getTextFromUrl(url):
 
     return smallerWordsRemoved
 
-print(getTextFromUrl('https://fr.wikipedia.org/wiki/R%C3%A9cepteur_sensoriel'))
+# print(getTextFromUrl('https://fr.wikipedia.org/wiki/R%C3%A9cepteur_sensoriel'))
 
-# link = soup.find('div', {'id': 'mw-content-text'}).find_all(('p', 'li'))
-
-# output = ''
-
-# for i in link:
-#     output += i.text
 
