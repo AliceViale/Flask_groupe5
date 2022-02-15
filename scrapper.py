@@ -2,21 +2,22 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-def getTextFromUrl(url):
+def getTextFromUrl(url : str):
+    """Scraps text from a given url and return a string of text only."""
     res = requests.get(url)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
 
-    output = ''
+    allWords = ''
 
-    for string in soup.stripped_strings:
-        output += ' ' + string.lower()
+    for strPiece in soup.stripped_strings:
+        allWords += ' ' + strPiece.lower()
 
-    output = re.sub("[^a-zA-Zàâäéèêëïîôöùûüÿç]+", " ", output)
+    allWords = re.sub("[^a-zA-Zàâäéèêëïîôöùûüÿç]+", " ", allWords)
 
     smallerWordsRemoved = ''
 
-    for word in output.split(' '):
+    for word in allWords.split(' '):
         if(len(word) > 2):
             smallerWordsRemoved += ' ' + word
 
