@@ -14,8 +14,8 @@ def hello(name=None):
 
 url = 'https://fr.wikipedia.org/wiki/Belzébuth'
 
-json_tree = get_json_tree(url)
-put_into_db(url,json_tree)
+json_tree, page = get_json_tree(url)
+put_into_db(url,json_tree,page)
 
 json_tree_dict = json.loads(json_tree)
 

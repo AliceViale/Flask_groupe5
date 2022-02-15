@@ -54,14 +54,15 @@ def word_counting(text):
 #     return json_result
 
 def get_json_tree(url):
-    result = word_counting(page_reading(url))
-    sorted_r = dict(sorted(result.items(), key=operator.itemgetter(1),reverse=True))
+    page = page_reading(url)
+    word_count = word_counting(page)
+    sorted_r = dict(sorted(word_count.items(), key=operator.itemgetter(1),reverse=True))
     json_result = json.dumps(sorted_r,ensure_ascii=False)
-    return json_result
+    return json_result, page
 
-def put_into_db(url,json_tree):
+def put_into_db(url,json_tree,page):
     if db.session.query(Knowledge.id).filter_by(url=url).first() is None:
-        new_Knowledge = Knowledge(url=url,json_tree=json_tree)
+        new_Knowledge = Knowledge(url=url,json_tree=json_tree,raw_text=page)
         db.session.add(new_Knowledge)
         db.session.commit()
     else:
