@@ -2,8 +2,8 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-def getTextFromUrl(url : str):
-    """Scraps text from a given url and return a string of text only."""
+def getTextFromUrl(url : str, nbChars : int):
+    """Scraps text from a given url and return a string of text only words of nbChars length."""
     res = requests.get(url)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
@@ -18,7 +18,7 @@ def getTextFromUrl(url : str):
     smallerWordsRemoved = ''
 
     for word in allWords.split(' '):
-        if(len(word) > 2):
+        if(len(word) > (nbChars - 1)):
             smallerWordsRemoved += ' ' + word
 
     return smallerWordsRemoved
