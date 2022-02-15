@@ -1,7 +1,6 @@
-from flask import Flask
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
 from os import path
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 DB_NAME = 'didyouknow.db'
@@ -14,7 +13,10 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
+    from .models import Knowledge
     create_database(app)
+    from .views import views
+    app.register_blueprint(views,url_prefix='/')
     return app
 
 def create_database(app):
