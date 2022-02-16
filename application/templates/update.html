@@ -1,0 +1,19 @@
+<!-- Correspond à la consigne 'tagger un texte déjà parsé' -->
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center"> Mettre à jour le graphe </h1>
+    <div class="form">
+        <form action="/update/{{task.id}}" method="POST">
+            <input type="text" name="content" id="content" value="{{task.content}}">
+            <input type="submit" value="Mettre à jour">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
