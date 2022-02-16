@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Ars Goetia</title>
+        <link rel="icon" type="image/png" href="https://www.imgonline.com.ua/result_img/imgonline-com-ua-Negative-zKHe1MsekK.png" />
+    </head>
+    <body>
+        <form method="POST">
+            <input type="text" id="url" name="url" placeholder="url to summon" required> 
+            <button type="submit" id="summon-btn">Summon</button>
+        </form>
+        <hr>
+        <ul>
+            {% for i in range(0,nb_url) %}
+                <li>
+                    <a href='{{url_list[i]}}' target="_Blank">{{title_list[i]}}</a>
+                    <form method="POST">
+                        <input type="hidden" id="revoke" name="revoke" value='{{url_list[i]}}'> 
+                        <span><button type="submit" id="kill-btn">X</button></span>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <form method="POST">
+            <input type="hidden" id="banish" name="banish" value="kill"> 
+            <button type="submit" id="banish-btn">Banish</button>
+        </form>
+    </body>
+</html>
