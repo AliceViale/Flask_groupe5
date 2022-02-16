@@ -1,6 +1,7 @@
 from os import path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_restful import Api
 
 db = SQLAlchemy()
 DB_NAME = 'didyouknow.db'
@@ -17,6 +18,11 @@ def create_app():
     create_database(app)
     from .views import views
     app.register_blueprint(views,url_prefix='/')
+
+    from .views import TreeAPI
+    api = Api(app)
+    api.add_resource(TreeAPI, '/tree/api', endpoint='tree')
+
     return app
 
 def create_database(app):

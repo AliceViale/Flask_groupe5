@@ -37,7 +37,12 @@ def put_into_db(url,json_tree,page,title):
         db.session.add(new_Knowledge)
         db.session.commit()
     else:
-        print("Nice try !")
+        db.session.query(Knowledge).filter(Knowledge.url == url).delete()
+        db.session.commit()
+        new_Knowledge = Knowledge(url=url,json_tree=json_tree,raw_text=page,title=title)
+        db.session.add(new_Knowledge)
+        db.session.commit()
+        print("Deleted existing page and recreated it.")
 
 # def getTextFromUrl(url : str, nbChars : int):
 #     res = requests.get(url)
